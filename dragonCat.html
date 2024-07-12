@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+    <style>
+        @import 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300';
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e1dddd;
+            font-family: "Roboto Condensed", sans-serif;
+            font-size: 16px;
+            line-height: 1.875em;
+            overflow: hidden;
+        }
+
+        .container_Cat {
+            position: absolute;
+            /* cursor:default; */
+            /* user-select: none; */
+            /* pointer-events: none; */
+            /* display: none; */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 500px;
+        }
+
+        #totoro {
+            position: relative;
+            cursor: pointer;
+        }
+
+        #totoro .head {
+            position: absolute;
+            left: 40px;
+            height: 240px;
+            width: 320px;
+            border-top-left-radius: 50% 60%;
+            border-top-right-radius: 50% 60%;
+            background-color: #bdb4b4;
+        }
+
+        #totoro .ear {
+            position: absolute;
+            top: -60px;
+            height: 80px;
+            width: 50px;
+            border-bottom-left-radius: 50% 20%;
+            border-bottom-right-radius: 50% 20%;
+            border-top-left-radius: 30px 100%;
+            border-top-right-radius: 30px 100%;
+            background-color: #bdb4b4;
+            transform-origin: center 145px;
+        }
+
+        #totoro .ear::after {
+            content: "";
+            position: absolute;
+            top: calc(100% - 5px);
+            left: 50%;
+            transform: translateX(-50%);
+            height: 70px;
+            width: 30px;
+            background-color: #bdb4b4;
+        }
+
+        #totoro .ear-left {
+            left: 45px;
+            transform: rotate(-15deg);
+            -webkit-animation-name: twitch;
+            animation-name: twitch;
+            -webkit-animation-duration: 5s;
+            animation-duration: 5s;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+        }
+
+        #totoro .ear-right {
+            right: 45px;
+            transform: rotate(15deg);
+        }
+
+        #totoro .eye {
+            position: absolute;
+            z-index: 15;
+            top: 50px;
+            height: 45px;
+            width: 45px;
+            border-bottom-left-radius: 50% 45%;
+            border-bottom-right-radius: 50% 45%;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            background-color: #f9f8f8;
+            transition: 0.35s 0.2s;
+        }
+
+        #totoro .eye-left {
+            left: 50px;
+        }
+
+        #totoro .eye-left .pupil {
+            left: 23px;
+        }
+
+        #totoro .eye-left .pupil::after {
+            left: 7px;
+        }
+
+        #totoro .eye-right {
+            right: 50px;
+        }
+
+        #totoro .eye-right .pupil {
+            right: 23px;
+        }
+
+        #totoro .eye-right .pupil::after {
+            right: 7px;
+        }
+
+        #totoro .pupil {
+            position: absolute;
+            top: 10px;
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background-color: #837373;
+            transition: 0.35s 0.2s;
+        }
+
+        #totoro .pupil::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            top: 4px;
+            height: 5px;
+            width: 4px;
+            background-color: #f9f8f8;
+        }
+
+        #totoro .nose {
+            position: absolute;
+            z-index: 15;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 20px;
+            width: 50px;
+            border-bottom-left-radius: 55% 50%;
+            border-bottom-right-radius: 55% 50%;
+            border-top-left-radius: 50% 60%;
+            border-top-right-radius: 50% 60%;
+            background-color: #837373;
+            transition: 0.35s 0.2s;
+        }
+
+        #totoro .nose::before,
+        #totoro .nose::after {
+            content: "";
+            position: absolute;
+            top: 12px;
+            background-color: #bdb4b4;
+            border-radius: 50%;
+            height: 20px;
+            width: 43px;
+        }
+
+        #totoro .nose::before {
+            left: -20px;
+        }
+
+        #totoro .nose::after {
+            right: -20px;
+        }
+
+        #totoro .mouth {
+            position: absolute;
+            z-index: 10;
+            top: 125px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 7px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #837373;
+            overflow: hidden;
+            transition: 0.6s;
+        }
+
+        #totoro .mouth-upper,
+        #totoro .mouth-lower {
+            position: absolute;
+            left: 50%;
+            height: 40px;
+            width: 100%;
+            overflow: hidden;
+            visibility: hidden;
+            transition: 0.4s 0.1s;
+        }
+
+        #totoro .mouth-upper {
+            z-index: 6;
+            top: -20px;
+            border-radius: 100%;
+            transform: translateX(-50%) translateY(-100px);
+        }
+
+        #totoro .mouth-lower {
+            bottom: -22px;
+            transform: translateX(-50%) translateY(100px);
+        }
+
+        #totoro .tooth {
+            position: absolute;
+            height: 40px;
+            width: 40px;
+            border-radius: 6px;
+            border: 2px solid #837373;
+            background-color: #f9f8f8;
+        }
+
+        #totoro .tooth:nth-child(1) {
+            left: -10px;
+        }
+
+        #totoro .tooth:nth-child(2) {
+            left: 30px;
+            top: 3px;
+        }
+
+        #totoro .tooth:nth-child(3) {
+            left: 70px;
+            top: 5px;
+        }
+
+        #totoro .tooth:nth-child(4) {
+            left: 110px;
+            top: 5px;
+        }
+
+        #totoro .tooth:nth-child(5) {
+            left: 150px;
+            top: 3px;
+        }
+
+        #totoro .tooth:nth-child(6) {
+            left: 190px;
+        }
+
+        #totoro .whiskas {
+            position: absolute;
+            z-index: 10;
+            top: 120px;
+            transition: 0.4s 0.15s;
+        }
+
+        #totoro .whiskas-left {
+            left: 25px;
+        }
+
+        #totoro .whiskas-left .whiska {
+            right: 0;
+            transform-origin: bottom right;
+        }
+
+        #totoro .whiskas-left .whiska-top {
+            transform: rotate(10deg);
+        }
+
+        #totoro .whiskas-left .whiska-bottom {
+            transform: rotate(-10deg);
+        }
+
+        #totoro .whiskas-right {
+            right: 25px;
+        }
+
+        #totoro .whiskas-right .whiska {
+            left: 0;
+            transform-origin: bottom left;
+        }
+
+        #totoro .whiskas-right .whiska-top {
+            transform: rotate(-10deg);
+        }
+
+        #totoro .whiskas-right .whiska-bottom {
+            transform: rotate(10deg);
+        }
+
+        #totoro .whiska {
+            position: absolute;
+            width: 90px;
+            height: 2px;
+            border-radius: 2px;
+            background-color: #837373;
+            transition: 0.6s;
+        }
+
+        #totoro .whiska-top {
+            top: -10px;
+            width: 80px;
+        }
+
+        #totoro .whiska-bottom {
+            top: 10px;
+            width: 70px;
+        }
+
+        #totoro .body {
+            position: relative;
+            top: 50px;
+            width: 400px;
+            height: 420px;
+            border-bottom-left-radius: 45% 30%;
+            border-bottom-right-radius: 45% 30%;
+            border-top-left-radius: 50% 60%;
+            border-top-right-radius: 50% 60%;
+            background-color: #bdb4b4;
+            display: inline-block;
+        }
+
+        #totoro .belly {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 380px;
+            height: 300px;
+            border-bottom-left-radius: 45% 35%;
+            border-bottom-right-radius: 45% 35%;
+            border-top-left-radius: 50% 60%;
+            border-top-right-radius: 50% 60%;
+            background-color: #e1dddd;
+            transition: 0.6s;
+        }
+
+        #totoro .chevron,
+        #totoro .chevron::after {
+            position: absolute;
+            background-color: #bdb4b4;
+            border-bottom-left-radius: 20px 100px;
+            border-bottom-right-radius: 20px 100px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        #totoro .chevron::after {
+            content: "";
+            left: -4px;
+            top: 10px;
+            transform-origin: top;
+            transform: rotate(-135deg);
+        }
+
+        #totoro .chevron-large,
+        #totoro .chevron-large::after {
+            height: 40px;
+            width: 15px;
+        }
+
+        #totoro .chevron-large.chevron-center {
+            top: 15px;
+            left: calc(50% - 20px);
+            transform: rotate(70deg);
+        }
+
+        #totoro .chevron-large.chevron-left,
+        #totoro .chevron-large.chevron-right {
+            top: 35px;
+        }
+
+        #totoro .chevron-large.chevron-left {
+            left: 65px;
+            transform: rotate(60deg);
+        }
+
+        #totoro .chevron-large.chevron-right {
+            right: 90px;
+            transform: rotate(80deg);
+        }
+
+        #totoro .chevron-small,
+        #totoro .chevron-small::after {
+            height: 35px;
+            width: 12px;
+        }
+
+        #totoro .chevron-small.chevron-center-left,
+        #totoro .chevron-small.chevron-center-right {
+            top: 70px;
+        }
+
+        #totoro .chevron-small.chevron-center-left {
+            left: calc(50% - 55px);
+            transform: rotate(65deg);
+        }
+
+        #totoro .chevron-small.chevron-center-right {
+            left: calc(50% + 25px);
+            transform: rotate(75deg);
+        }
+
+        #totoro .chevron-small.chevron-left,
+        #totoro .chevron-small.chevron-right {
+            top: 90px;
+        }
+
+        #totoro .chevron-small.chevron-left {
+            left: 40px;
+            transform: rotate(55deg);
+        }
+
+        #totoro .chevron-small.chevron-right {
+            right: 60px;
+            transform: rotate(85deg);
+        }
+
+        #totoro .arm {
+            position: absolute;
+            z-index: -1;
+            top: 90px;
+            height: 160px;
+            width: 90px;
+            background-color: #b3a9a9;
+            transition: 1s;
+        }
+
+        #totoro .arm-left {
+            left: 50px;
+            border-bottom-left-radius: 50px 80%;
+            border-bottom-right-radius: 40px 65%;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 15px;
+            transform-origin: top left;
+            transform: rotate(35deg);
+        }
+
+        #totoro .arm-left .nail:nth-child(1) {
+            left: 35px;
+        }
+
+        #totoro .arm-left .nail:nth-child(2) {
+            bottom: -13px;
+            left: 47px;
+        }
+
+        #totoro .arm-left .nail:nth-child(3) {
+            left: 59px;
+        }
+
+        #totoro .arm-right {
+            right: 50px;
+            border-bottom-left-radius: 40px 65%;
+            border-bottom-right-radius: 50px 80%;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 30px;
+            transform-origin: top right;
+            transform: rotate(-35deg);
+        }
+
+        #totoro .arm-right .nail:nth-child(1) {
+            right: 35px;
+        }
+
+        #totoro .arm-right .nail:nth-child(2) {
+            bottom: -13px;
+            right: 47px;
+        }
+
+        #totoro .arm-right .nail:nth-child(3) {
+            right: 59px;
+        }
+
+        #totoro .arm .nail {
+            bottom: -10px;
+        }
+
+        #totoro .leg {
+            position: absolute;
+            z-index: -1;
+            bottom: -5px;
+            width: 150px;
+            height: 70px;
+            background-color: #b3a9a9;
+        }
+
+        #totoro .leg-left {
+            right: calc(50% + 5px);
+            border-radius: 30px;
+            border-bottom-left-radius: 70% 100%;
+            border-bottom-right-radius: 15px;
+            border-top-left-radius: 50% 15px;
+            border-top-right-radius: 15px;
+        }
+
+        #totoro .leg-right {
+            left: calc(50% + 5px);
+            border-radius: 30px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 70% 100%;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 50% 15px;
+        }
+
+        #totoro .nail {
+            position: absolute;
+            z-index: 10;
+            height: 20px;
+            width: 5px;
+            background-color: #f9f8f8;
+            border-bottom-left-radius: 2px 70%;
+            border-bottom-right-radius: 2px 70%;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            transform-origin: top center;
+        }
+
+        #totoro:hover .eye-left {
+            transform: translateY(-6px) scaleY(0.93) scaleX(1.02) rotate(-15deg);
+        }
+
+        #totoro:hover .eye-left .pupil {
+            transform: translate(-8px, -3px);
+        }
+
+        #totoro:hover .eye-right {
+            transform: translateY(-6px) scaleY(0.93) scaleX(1.02) rotate(15deg);
+        }
+
+        #totoro:hover .eye-right .pupil {
+            transform: translate(8px, -3px);
+        }
+
+        #totoro:hover .nose {
+            transform: translate(-50%, -3px) scale(0.97);
+        }
+
+        #totoro:hover .mouth {
+            width: 220px;
+            height: 55px;
+            border-bottom-left-radius: 60px 60%;
+            border-bottom-right-radius: 60px 60%;
+            border-top-left-radius: 40px 40%;
+            border-top-right-radius: 40px 40%;
+            transform: translate(-50%, -20px);
+            transition: transform 0.8s, width 0.6s, height 0.6s 0.2s;
+        }
+
+        #totoro:hover .mouth-upper,
+        #totoro:hover .mouth-lower {
+            visibility: visible;
+            transition: 0.4s 0.3s;
+        }
+
+        #totoro:hover .mouth-upper {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        #totoro:hover .mouth-lower {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        #totoro:hover .whiskas-left {
+            transform: translateX(-5px) scaleX(0.95);
+        }
+
+        #totoro:hover .whiskas-left .whiska-bottom {
+            transform: rotate(-5deg);
+        }
+
+        #totoro:hover .whiskas-right {
+            transform: translateX(5px) scaleX(0.95);
+        }
+
+        #totoro:hover .whiskas-right .whiska-bottom {
+            transform: rotate(5deg);
+        }
+
+        #totoro:hover .belly {
+            height: 270px;
+            border-top-left-radius: 50% 57%;
+            border-top-right-radius: 50% 57%;
+        }
+
+        #totoro:hover .arm-left {
+            top: 105px;
+            left: 75px;
+            transform: rotate(100deg);
+        }
+
+        #totoro:hover .arm-right {
+            top: 105px;
+            right: 75px;
+            transform: rotate(-100deg);
+        }
+
+        @-webkit-keyframes twitch {
+
+            0%,
+            26%,
+            35%,
+            47%,
+            100% {
+                transform: rotate(-15deg);
+            }
+
+            30% {
+                transform: rotate(-17deg) scaleY(0.95);
+            }
+
+            40% {
+                transform: rotate(-21deg) scaleY(0.91);
+            }
+        }
+
+        @keyframes twitch {
+
+            0%,
+            26%,
+            35%,
+            47%,
+            100% {
+                transform: rotate(-15deg);
+            }
+
+            30% {
+                transform: rotate(-17deg) scaleY(0.95);
+            }
+
+            40% {
+                transform: rotate(-21deg) scaleY(0.91);
+            }
+        }
+
+        /* html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: #2294b3;
+            overflow: hidden;
+        } */
+
+        .container {
+            display: none;
+            padding-top: 62.5%;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+        }
+
+        .container.active {
+            cursor: ew-resize;
+        }
+
+        img,
+        .mound-group,
+        .houses-group,
+        .flbottom-group,
+        .blbottom-group,
+        .brleg,
+        .frleg,
+        .blleg,
+        .flleg {
+            position: absolute;
+            transform-style: preserve-3d;
+        }
+
+        .castle-container {
+            position: absolute;
+            left: 100%;
+            bottom: 0%;
+        }
+
+        .castle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 600px;
+            height: 750px;
+            perspective: 1000px;
+            transform-origin: 50% 70%;
+            transform: translate(-50%, -70%) rotateZ(9deg) scale(0.1);
+
+        }
+
+        .brleg {
+            left: 400px;
+            top: 625px;
+            transform-origin: 10px -10px;
+            transform: rotateZ(0deg);
+        }
+
+        .brfoot {
+            left: -18px;
+            top: 82px;
+            transform-origin: 56% 44%;
+            transform: rotateZ(0deg);
+        }
+
+        .brbottom {}
+
+        .frleg {
+            left: 240px;
+            top: 653px;
+            transform-origin: 8px -10px;
+            transform: rotateZ(0deg);
+        }
+
+        .frfoot {
+            left: -18px;
+            top: 51px;
+            transform-origin: 56% 44%;
+            transform: rotateZ(0deg);
+        }
+
+        .frbottom {}
+
+        .chimney3 {
+            left: 400px;
+            top: 30px;
+            transform-origin: 45% 120%;
+            transform: rotateZ(0deg);
+        }
+
+        .houses-group {
+            left: 305px;
+            top: 130px;
+            transform-origin: -50px 300px;
+            transform: rotateZ(1deg);
+        }
+
+        .point6 {
+            left: 84px;
+            top: 19px;
+            transform-origin: 40% 120%;
+            transform: rotateZ(0deg);
+        }
+
+        .point5 {
+            left: 70px;
+            top: -23px;
+            transform-origin: -40% 200%;
+            transform: rotateZ(0deg);
+        }
+
+        .point4 {
+            left: 40px;
+            top: -17px;
+            transform-origin: 0% 100%;
+            transform: rotateZ(0deg);
+        }
+
+        .houses {}
+
+        .treehouse {
+            left: 220px;
+            top: 10px;
+            transform-origin: 50% 150%;
+            transform: rotateZ(0deg);
+        }
+
+        .chimney2 {
+            left: 430px;
+            top: 120px;
+            transform-origin: 0% 90%;
+            transform: rotateZ(0deg);
+        }
+
+        .chimney1 {
+            left: 420px;
+            top: 90px;
+            transform-origin: -10% 90%;
+            transform: rotateZ(0deg);
+        }
+
+        .wing {
+            left: 420px;
+            top: 370px;
+            transform-origin: 0% 50%;
+            transform: rotateZ(0deg);
+        }
+
+        .antenna {
+            left: -100px;
+            top: 90px;
+            transform-origin: 100% 65%;
+            transform: rotateZ(0deg);
+        }
+
+        .mound-group {
+            left: 115px;
+            top: 110px;
+            transform-origin: 110px 220px;
+            transform: rotateZ(0deg);
+        }
+
+        .point3 {
+            left: 125px;
+            top: -13px;
+            transform-origin: 50% 400%;
+            transform: rotateZ(0deg);
+        }
+
+        .point2 {
+            left: 50px;
+            top: -22px;
+            transform-origin: 120% 200%;
+            transform: rotateZ(0deg);
+        }
+
+        .point1 {
+            left: 4px;
+            top: 55px;
+            transform-origin: 150% 150%;
+            transform: rotateZ(0deg);
+        }
+
+        .mound {}
+
+        .wind {
+            left: 400px;
+            top: 260px;
+            transform-origin: 0% 90%;
+            transform: rotateZ(0deg);
+        }
+
+        .cannon {
+            left: 30px;
+            top: 460px;
+            transform-origin: 100% 60%;
+            transform: rotateZ(0deg);
+        }
+
+        .main {
+            left: 80px;
+            top: 230px;
+            transform-origin: 50% 50%;
+            transform: rotateZ(0deg);
+        }
+
+        .blleg {
+            left: 410px;
+            top: 615px;
+            transform-origin: 10px 15px;
+            transform: rotateZ(0deg);
+        }
+
+        .blbottom-group {
+            left: 0px;
+            top: 60px;
+            transform-origin: 10px 0px;
+            transform: rotateZ(0deg);
+        }
+
+        .blfoot {
+            left: -19px;
+            top: 68px;
+            transform-origin: 56% 44%;
+            transform: rotateZ(0deg);
+        }
+
+        .blbottom {}
+
+        .bltop {}
+
+        .blcover {
+            left: 360px;
+            top: 573px;
+        }
+
+        .knob {
+            left: 214px;
+            top: 524px;
+            transform-origin: 30% 63%;
+            transform: rotateZ(0deg);
+        }
+
+        .tele {
+            left: 90px;
+            top: 430px;
+            transform-origin: 90% 50%;
+            transform: rotateZ(0deg);
+        }
+
+        .telecover {
+            left: 161px;
+            top: 399px;
+        }
+
+        .flleg {
+            left: 250px;
+            top: 615px;
+            transform-origin: 10px 15px;
+            transform: rotateZ(0deg);
+        }
+
+        .flbottom-group {
+            left: 0px;
+            top: 60px;
+            transform-origin: 10px 0px;
+            transform: rotateZ(0deg);
+        }
+
+        .flfoot {
+            left: -19px;
+            top: 68px;
+            transform-origin: 56% 44%;
+            transform: rotateZ(0deg);
+        }
+
+        .flbottom {}
+
+        .fltop {}
+
+        .flcover {
+            left: 244px;
+            top: 567px;
+        }
+
+        .foreground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .background {
+            position: absolute;
+            bottom: 25.5%;
+            left: 0;
+            width: 100%;
+        }
+        .clouds{
+            display: none;
+        }
+        .cloud-bg {
+            bottom: 17%;
+            width: 80%;
+            right: 100%;
+        }
+
+        .cloud-bg2 {
+            bottom: 17%;
+            width: 80%;
+            right: 100%;
+        }
+
+        .cloud-shadow1 {
+            bottom: 43%;
+            right: 100%;
+            width: 80%;
+            transform: rotate(5deg);
+        }
+
+        .cloud1 {
+            bottom: 30%;
+            right: 100%;
+            width: 80%;
+        }
+
+        .cloud-shadow2 {
+            bottom: 12%;
+            left: 36%;
+            width: 80%;
+            transform: rotate(5deg);
+        }
+
+        .cloud-shadow3 {
+            bottom: 31%;
+            left: -30%;
+            width: 80%;
+            transform: rotate(5deg);
+        }
+
+        .cloud2 {
+            bottom: 46%;
+            left: -29%;
+            width: 80%;
+        }
+
+        .cloud3 {
+            bottom: 38%;
+            left: 17%;
+            width: 80%;
+        }
+
+        .cloud4 {
+            bottom: 18%;
+            left: -18%;
+            width: 80%;
+        }
+
+        .cloud5 {
+            bottom: 8%;
+            left: 40%;
+            width: 80%;
+        }
+
+        .control-toggle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 1);
+            font-family: sans-serif;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.05em;
+            opacity: 0.1;
+            cursor: pointer;
+        }
+
+        .control-toggle:hover {
+            opacity: 1;
+        }
+
+        .load-gate {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #fff;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container_Cat">
+        <div id="totoro">
+            <div class="head">
+                <div class="ear ear-left"></div>
+                <div class="ear ear-right"></div>
+                <div class="eye eye-left">
+                    <div class="pupil"></div>
+                </div>
+                <div class="eye eye-right">
+                    <div class="pupil"></div>
+                </div>
+                <div class="nose"></div>
+                <div class="mouth">
+                    <div class="mouth-upper">
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                    </div>
+                    <div class="mouth-lower">
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                        <div class="tooth"></div>
+                    </div>
+                </div>
+                <div class="whiskas whiskas-left">
+                    <div class="whiska whiska-top"></div>
+                    <div class="whiska"></div>
+                    <div class="whiska whiska-bottom"></div>
+                </div>
+                <div class="whiskas whiskas-right">
+                    <div class="whiska whiska-top"></div>
+                    <div class="whiska"></div>
+                    <div class="whiska whiska-bottom"></div>
+                </div>
+            </div>
+            <div class="body">
+                <div class="belly">
+                    <div class="chevron chevron-large chevron-left"></div>
+                    <div class="chevron chevron-large chevron-center"></div>
+                    <div class="chevron chevron-large chevron-right"></div>
+                    <div class="chevron chevron-small chevron-left"></div>
+                    <div class="chevron chevron-small chevron-center-left"></div>
+                    <div class="chevron chevron-small chevron-center-right"></div>
+                    <div class="chevron chevron-small chevron-right"></div>
+                </div>
+                <div class="arm arm-left">
+                    <div class="nail"></div>
+                    <div class="nail"></div>
+                    <div class="nail"></div>
+                </div>
+                <div class="arm arm-right">
+                    <div class="nail"></div>
+                    <div class="nail"></div>
+                    <div class="nail"></div>
+                </div>
+                <div class="leg leg-left"></div>
+                <div class="leg leg-right"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <img class="background" src="http://cinemont.com/tutorials/howls/background.jpg">
+
+        <img class="cloud-bg" src="http://cinemont.com/tutorials/howls/cloud-bg.png">
+        <img class="cloud-bg2" src="http://cinemont.com/tutorials/howls/cloud-bg.png">
+
+        <div class="castle-container">
+            <div class="castle">
+                <div class="brleg">
+                    <img class="brfoot" src="http://cinemont.com/tutorials/howls/brfoot.png" />
+                    <img class="brbottom" src="http://cinemont.com/tutorials/howls/brbottom.png" />
+                </div>
+                <div class="frleg">
+                    <img class="frfoot" src="http://cinemont.com/tutorials/howls/frfoot.png" />
+                    <img class="frbottom" src="http://cinemont.com/tutorials/howls/frbottom.png" />
+                </div>
+                <img class="chimney3" src="http://cinemont.com/tutorials/howls/chimney3.png" />
+                <img class="treehouse" src="http://cinemont.com/tutorials/howls/treehouse.png" />
+                <div class="houses-group">
+                    <img class="point6" src="http://cinemont.com/tutorials/howls/point6.png" />
+                    <img class="point5" src="http://cinemont.com/tutorials/howls/point5.png" />
+                    <img class="point4" src="http://cinemont.com/tutorials/howls/point4.png" />
+                    <img class="houses" src="http://cinemont.com/tutorials/howls/houses.png" />
+                </div>
+                <img class="chimney2" src="http://cinemont.com/tutorials/howls/chimney2.png" />
+                <img class="chimney1" src="http://cinemont.com/tutorials/howls/chimney1.png" />
+                <img class="wing" src="http://cinemont.com/tutorials/howls/wing.png" />
+                <div class="mound-group">
+                    <img class="antenna" src="http://cinemont.com/tutorials/howls/antenna.png" />
+                    <img class="point3" src="http://cinemont.com/tutorials/howls/point3.png" />
+                    <img class="point2" src="http://cinemont.com/tutorials/howls/point2.png" />
+                    <img class="point1" src="http://cinemont.com/tutorials/howls/point1.png" />
+                    <img class="mound" src="http://cinemont.com/tutorials/howls/mound.png" />
+                </div>
+                <img class="wind" src="http://cinemont.com/tutorials/howls/wind.png" />
+                <img class="cannon" src="http://cinemont.com/tutorials/howls/cannon.png" />
+                <img class="main" src="http://cinemont.com/tutorials/howls/main.png" />
+                <div class="blleg">
+                    <div class="blbottom-group">
+                        <img class="blfoot" src="http://cinemont.com/tutorials/howls/flfoot.png" />
+                        <img class="blbottom" src="http://cinemont.com/tutorials/howls/flbottom.png" />
+                    </div>
+                    <img class="bltop" src="http://cinemont.com/tutorials/howls/fltop.png" />
+                </div>
+                <img class="blcover" src="http://cinemont.com/tutorials/howls/blcover.png" />
+                <img class="knob" src="http://cinemont.com/tutorials/howls/knob.png" />
+                <img class="tele" src="http://cinemont.com/tutorials/howls/tele.png" />
+                <img class="telecover" src="http://cinemont.com/tutorials/howls/telecover.png" />
+                <div class="flleg">
+                    <div class="flbottom-group">
+                        <img class="flfoot" src="http://cinemont.com/tutorials/howls/flfoot.png" />
+                        <img class="flbottom" src="http://cinemont.com/tutorials/howls/flbottom.png" />
+                    </div>
+                    <img class="fltop" src="http://cinemont.com/tutorials/howls/fltop.png" />
+                </div>
+                <img class="flcover" src="http://cinemont.com/tutorials/howls/flcover.png" />
+            </div>
+        </div>
+
+        <img class="foreground" src="http://cinemont.com/tutorials/howls/foreground.png">
+
+        <div class="clouds">
+            <img class="cloud-shadow1" src="http://cinemont.com/tutorials/howls/cloud_shadow-1.png">
+            <img class="cloud-shadow2" src="http://cinemont.com/tutorials/howls/cloud_shadow-1.png">
+            <img class="cloud-shadow3" src="http://cinemont.com/tutorials/howls/cloud_shadow-1.png">
+            <img class="cloud1" src="http://cinemont.com/tutorials/howls/cloud-1.png">
+            <img class="cloud2" src="http://cinemont.com/tutorials/howls/cloud-1.png">
+            <img class="cloud3" src="http://cinemont.com/tutorials/howls/cloud-2.png">
+            <img class="cloud4" src="http://cinemont.com/tutorials/howls/cloud-1.png">
+            <img class="cloud5" src="http://cinemont.com/tutorials/howls/cloud-2.png">
+        </div>
+
+    </div>
+    <div class="control-toggle">Toggle mouse controls</div>
+    <!-- <div class="load-gate">Loading...</div> -->
+    
+    <script >
+        var speed = 0.9;    // 速度
+        var WIDTH;  // 浏览器宽度 window.innerWidth
+        var HEIGHT; // 浏览器高度 window.innerHeight
+        var castleWidth;
+        var scale;
+        var control = false;
+
+        var progress = 0.0;
+
+        var _castleCont = $(".castle-container");
+        var _castle = $(".castle");
+
+        var resize = function () {
+            WIDTH = window.innerWidth;
+            HEIGHT = window.innerHeight;
+            scale = WIDTH / 1440;
+
+            castleWidth = _castle.width() * scale;
+
+            TweenLite.set(_castle, { scale: scale * 0.85 });
+        };
+        resize();
+        $(window).on("resize", resize);
+
+        var draw = function () {
+            requestAnimationFrame(draw);
+
+            progress += 0.0012 * speed;
+            if (progress > 1) progress = 0;
+            if (progress < 0) progress = 1;
+
+            TweenLite.set(_castleCont, {
+                x: (1440 * scale + castleWidth) * -progress + castleWidth / 2,
+                y: 900 * scale * -(0.36 + progress * 0.35)
+            });
+        };
+
+        $(document).on("mousemove", function (e) {
+            if (!control) return;
+
+            speed = (1 - (e.clientX / WIDTH) * 2) * 2;
+
+            tl.timeScale(speed);
+            tl2.timeScale(speed);
+            tl3.timeScale(speed);
+            tl4.timeScale(speed);
+            tl5.timeScale(speed);
+        });
+
+        $(".control-toggle").on("click", function () {
+            control = !control;
+            $(".container").toggleClass("active");
+        });
+
+        TweenLite.defaultEase = Power1.easeInOut;
+
+        var cloudIntro = function () {
+            TweenLite.to($(".cloud1"), 20, {
+                x: WIDTH * 2,
+                y: 300 * scale,
+                opacity: 0.3,
+                ease: Linear.easeNone,
+                force3D: true
+            });
+            TweenLite.to($(".cloud-shadow1"), 20, {
+                x: WIDTH * 2 + 50 * scale,
+                y: 450 * scale,
+                opacity: 0.2,
+                ease: Linear.easeNone,
+                force3D: true
+            });
+            TweenLite.to($(".cloud-shadow2"), 20, {
+                x: WIDTH * 2 + 50 * scale,
+                y: 450 * scale,
+                ease: Linear.easeNone,
+                force3D: true
+            });
+            TweenLite.to($(".cloud-shadow3"), 20, {
+                x: WIDTH * 2 + 50 * scale,
+                y: 450 * scale,
+                ease: Linear.easeNone,
+                force3D: true
+            });
+            TweenLite.to($(".cloud2"), 20, {
+                x: WIDTH * 2,
+                y: 300 * scale,
+                opacity: 0.5,
+                ease: Linear.easeNone,
+                force3D: true
+            });
+            TweenLite.to($(".cloud3"), 20, {
+                x: WIDTH * 2,
+                y: 300 * scale,
+                ease: Linear.easeNone,
+                force3D: true
+            });
+            TweenLite.to($(".cloud4"), 20, {
+                x: WIDTH * 2,
+                y: 300 * scale,
+                ease: Linear.easeNone,
+                force3D: true
+            });
+            TweenLite.to($(".cloud5"), 20, {
+                x: WIDTH * 2,
+                y: 300 * scale,
+                ease: Linear.easeNone,
+                force3D: true,
+                onComplete: function () {
+                    $(".clouds").remove();
+                }
+            });
+        };
+
+        var init = function () {
+            TweenLite.to($(".load-gate"), 0.5, {
+                opacity: 0,
+                onComplete: function () {
+                    $(".load-gate").remove();
+                }
+            });
+            requestAnimationFrame(draw);
+            cloudIntro();
+        };
+        if (document.readyState == "complete") {
+            init();
+        } else {
+            $(window).load(init);
+        }
+
+        TweenMax.to($(".cloud-bg"), 40, {
+            x: WIDTH * 2,
+            y: 200 * scale,
+            ease: Linear.easeNone,
+            repeat: -1,
+            force3D: true,
+            onRepeat: function () {
+                TweenLite.set(this.target[0], {
+                    y: Math.random() * 200 - 100,
+                    rotationZ: Math.round(Math.random() * 60) - 30,
+                    scaleX: Math.random() > 0.5 ? 1 : -1
+                });
+            }
+        });
+
+        TweenMax.to($(".cloud-bg2"), 40, {
+            x: WIDTH * 2,
+            y: 200 * scale,
+            ease: Linear.easeNone,
+            delay: 10,
+            repeat: -1,
+            force3D: true,
+            onRepeat: function () {
+                TweenLite.set(this.target[0], {
+                    y: Math.random() * 200 - 100,
+                    rotationZ: Math.round(Math.random() * 60) - 30,
+                    scaleX: Math.random() > 0.5 ? 1 : -1
+                });
+            }
+        });
+
+        var tl = new TimelineMax({
+            repeat: -1,
+            onReverseComplete: function () {
+                this.seek(tl.duration());
+            }
+        });
+
+        var _flleg = $(".flleg");
+        var _flbottomGroup = $(".flbottom-group");
+        var _flfoot = $(".flfoot");
+
+        TweenLite.set(_flleg, { rotationZ: 45, x: -5 });
+        TweenLite.set(_flbottomGroup, { rotationZ: 5 });
+        TweenLite.set(_flfoot, { rotationZ: -50 });
+
+        tl.add([
+            TweenLite.to(_flleg, 1.0, { rotationZ: -45, delay: 0.0, force3D: true }),
+
+            TweenLite.to(_flleg, 0.2, {
+                x: 0,
+                delay: 0.0,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+
+            TweenLite.to(_flleg, 0.55, { scaleY: 0.8, delay: 0.0, force3D: true }),
+            TweenLite.to(_flbottomGroup, 0.55, {
+                scaleY: 0.8,
+                delay: 0.0,
+                force3D: true
+            }),
+            TweenLite.to(_flbottomGroup, 0.6, {
+                rotationZ: 20,
+                delay: 0.0,
+                ease: Power3.easeIn,
+                force3D: true
+            }),
+            TweenLite.to(_flfoot, 0.55, { scaleY: 1.5, delay: 0.0, force3D: true }),
+            TweenLite.to(_flfoot, 0.6, {
+                rotationZ: 10,
+                delay: 0.0,
+                ease: Power2.easeIn,
+                force3D: true
+            }),
+
+            TweenLite.to(_flleg, 0.4, { scaleY: 1.0, delay: 0.6, force3D: true }),
+            TweenLite.to(_flbottomGroup, 0.4, { scaleY: 0.7, delay: 0.6, force3D: true }),
+            TweenLite.to(_flbottomGroup, 0.4, {
+                rotationZ: 50,
+                delay: 0.6,
+                force3D: true
+            }),
+            TweenLite.to(_flfoot, 0.2, {
+                rotationZ: 10,
+                delay: 0.6,
+                ease: Linear.easeNone,
+                force3D: true
+            }),
+            TweenLite.to(_flfoot, 0.2, {
+                rotationZ: -10,
+                delay: 0.8,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_flfoot, 0.4, { scaleY: 1.5, delay: 0.6, force3D: true }),
+
+            TweenLite.to(_flleg, 0.6, { x: 20, delay: 0.7, force3D: true }),
+
+            TweenLite.to(_flleg, 0.5, {
+                rotationZ: 0,
+                delay: 1.0,
+                ease: Power1.easeIn,
+                force3D: true
+            }),
+            TweenLite.to(_flleg, 0.5, { scaleY: 0.8, delay: 1.0, force3D: true }),
+            TweenLite.to(_flbottomGroup, 0.5, { scaleY: 0.5, delay: 1.0, force3D: true }),
+            TweenLite.to(_flfoot, 0.5, {
+                scaleX: 1.8,
+                scaleY: 1.7,
+                delay: 1.0,
+                ease: Power1.easeIn,
+                force3D: true
+            }),
+            TweenLite.to(_flbottomGroup, 0.5, {
+                rotationZ: 40,
+                delay: 1.0,
+                force3D: true
+            }),
+            TweenLite.to(_flfoot, 0.5, { rotationZ: -70, delay: 1.0, force3D: true }),
+
+            TweenLite.to(_flleg, 0.5, {
+                rotationZ: 45,
+                delay: 1.5,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_flleg, 0.5, { scaleY: 1.0, delay: 1.5, force3D: true }),
+            TweenLite.to(_flbottomGroup, 0.5, { scaleY: 1.0, delay: 1.5, force3D: true }),
+            TweenLite.to(_flbottomGroup, 0.5, {
+                rotationZ: 5,
+                delay: 1.5,
+                force3D: true
+            }),
+            TweenLite.to(_flfoot, 0.5, { rotationZ: -50, delay: 1.5, force3D: true }),
+            TweenLite.to(_flfoot, 0.5, {
+                scaleX: 1.0,
+                scaleY: 1.0,
+                delay: 1.5,
+                force3D: true
+            }),
+
+            TweenLite.to(_flleg, 0.5, { x: -10, delay: 1.3, force3D: true }),
+
+            TweenLite.to(_flleg, 0.2, {
+                x: -5,
+                delay: 1.8,
+                ease: Power1.easeIn,
+                force3D: true
+            })
+        ]);
+
+        var tl2 = new TimelineMax({
+            repeat: -1,
+            delay: 0.7,
+            onReverseComplete: function () {
+                this.seek(tl2.duration());
+            }
+        });
+
+        var _blleg = $(".blleg");
+        var _blbottomGroup = $(".blbottom-group");
+        var _blfoot = $(".blfoot");
+
+        TweenLite.set(_blleg, { rotationZ: 45, x: -5 });
+        TweenLite.set(_blbottomGroup, { rotationZ: 5 });
+        TweenLite.set(_blfoot, { rotationZ: -50 });
+
+        tl2.add([
+            TweenLite.to(_blleg, 1.0, { rotationZ: -45, delay: 0.0, force3D: true }),
+
+            TweenLite.to(_blleg, 0.2, {
+                x: 0,
+                delay: 0.0,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+
+            TweenLite.to(_blleg, 0.55, { scaleY: 0.8, delay: 0.0, force3D: true }),
+            TweenLite.to(_blbottomGroup, 0.55, {
+                scaleY: 0.8,
+                delay: 0.0,
+                force3D: true
+            }),
+            TweenLite.to(_blbottomGroup, 0.6, {
+                rotationZ: 20,
+                delay: 0.0,
+                ease: Power3.easeIn,
+                force3D: true
+            }),
+            TweenLite.to(_blfoot, 0.55, { scaleY: 1.5, delay: 0.0, force3D: true }),
+            TweenLite.to(_blfoot, 0.6, {
+                rotationZ: 10,
+                delay: 0.0,
+                ease: Power2.easeIn,
+                force3D: true
+            }),
+
+            TweenLite.to(_blleg, 0.4, { scaleY: 1.0, delay: 0.6, force3D: true }),
+            TweenLite.to(_blbottomGroup, 0.4, { scaleY: 0.7, delay: 0.6, force3D: true }),
+            TweenLite.to(_blbottomGroup, 0.4, {
+                rotationZ: 50,
+                delay: 0.6,
+                force3D: true
+            }),
+            TweenLite.to(_blfoot, 0.2, {
+                rotationZ: 10,
+                delay: 0.6,
+                ease: Linear.easeNone,
+                force3D: true
+            }),
+            TweenLite.to(_blfoot, 0.2, {
+                rotationZ: -10,
+                delay: 0.8,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_blfoot, 0.4, { scaleY: 1.5, delay: 0.6, force3D: true }),
+
+            TweenLite.to(_blleg, 0.6, { x: 20, delay: 0.7, force3D: true }),
+
+            TweenLite.to(_blleg, 0.5, {
+                rotationZ: 0,
+                delay: 1.0,
+                ease: Power1.easeIn,
+                force3D: true
+            }),
+            TweenLite.to(_blleg, 0.5, { scaleY: 0.8, delay: 1.0, force3D: true }),
+            TweenLite.to(_blbottomGroup, 0.5, { scaleY: 0.5, delay: 1.0, force3D: true }),
+            TweenLite.to(_blfoot, 0.5, {
+                scaleX: 1.8,
+                scaleY: 1.7,
+                delay: 1.0,
+                ease: Power1.easeIn,
+                force3D: true
+            }),
+            TweenLite.to(_blbottomGroup, 0.5, {
+                rotationZ: 40,
+                delay: 1.0,
+                force3D: true
+            }),
+            TweenLite.to(_blfoot, 0.5, { rotationZ: -70, delay: 1.0, force3D: true }),
+
+            TweenLite.to(_blleg, 0.5, {
+                rotationZ: 45,
+                delay: 1.5,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_blleg, 0.5, { scaleY: 1.0, delay: 1.5, force3D: true }),
+            TweenLite.to(_blbottomGroup, 0.5, { scaleY: 1.0, delay: 1.5, force3D: true }),
+            TweenLite.to(_blbottomGroup, 0.5, {
+                rotationZ: 5,
+                delay: 1.5,
+                force3D: true
+            }),
+            TweenLite.to(_blfoot, 0.5, { rotationZ: -50, delay: 1.5, force3D: true }),
+            TweenLite.to(_blfoot, 0.5, {
+                scaleX: 1.0,
+                scaleY: 1.0,
+                delay: 1.5,
+                force3D: true
+            }),
+
+            TweenLite.to(_blleg, 0.5, { x: -10, delay: 1.3, force3D: true }),
+
+            TweenLite.to(_blleg, 0.2, {
+                x: -5,
+                delay: 1.8,
+                ease: Power1.easeIn,
+                force3D: true
+            })
+        ]);
+
+        var tl3 = new TimelineMax({
+            repeat: -1,
+            delay: 1.0,
+            onReverseComplete: function () {
+                this.seek(tl3.duration());
+            }
+        });
+
+        var _frleg = $(".frleg");
+        var _frfoot = $(".frfoot");
+
+        TweenLite.set(_frleg, { rotationZ: 35, x: -40 });
+        TweenLite.set(_frfoot, { rotationZ: -35 });
+
+        tl3.add([
+            TweenLite.to(_frleg, 0.9, { rotationZ: -35, delay: 0.0, force3D: true }),
+            TweenLite.to(_frleg, 1.2, {
+                x: 40,
+                delay: 0.0,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+
+            TweenLite.to(_frfoot, 0.9, { rotationZ: 35, delay: 0.0, force3D: true }),
+
+            TweenLite.to(_frleg, 0.4, {
+                y: -15,
+                delay: 0.0,
+                ease: Power1.easeIn,
+                force3D: true
+            }),
+            TweenLite.to(_frleg, 0.4, {
+                y: 0,
+                delay: 0.5,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+
+            TweenLite.to(_frleg, 1.1, { rotationZ: 35, delay: 0.9, force3D: true }),
+            TweenLite.to(_frleg, 0.6, { x: -50, delay: 1.2, force3D: true }),
+
+            TweenLite.to(_frfoot, 0.5, { rotationZ: -50, delay: 0.9, force3D: true }),
+            TweenLite.to(_frfoot, 0.3, { rotationZ: -35, delay: 1.7, force3D: true }),
+
+            TweenLite.to(_frleg, 0.6, { y: -40, delay: 0.9, force3D: true }),
+            TweenLite.to(_frleg, 0.5, { y: 0, delay: 1.5, force3D: true }),
+
+            TweenLite.to(_frleg, 0.2, {
+                x: -40,
+                delay: 1.8,
+                ease: Power1.easeIn,
+                force3D: true
+            })
+        ]);
+
+        var tl4 = new TimelineMax({
+            repeat: -1,
+            delay: 1.7,
+            onReverseComplete: function () {
+                this.seek(tl4.duration());
+            }
+        });
+
+        var _brleg = $(".brleg");
+        var _brfoot = $(".brfoot");
+
+        TweenLite.set(_brleg, { rotationZ: 35, x: -40 });
+        TweenLite.set(_brfoot, { rotationZ: -35 });
+
+        tl4.add([
+            TweenLite.to(_brleg, 0.9, { rotationZ: -35, delay: 0.0, force3D: true }),
+            TweenLite.to(_brleg, 1.2, {
+                x: 40,
+                delay: 0.0,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+
+            TweenLite.to(_brfoot, 0.9, { rotationZ: 35, delay: 0.0, force3D: true }),
+
+            TweenLite.to(_brleg, 0.4, {
+                y: -15,
+                delay: 0.0,
+                ease: Power1.easeIn,
+                force3D: true
+            }),
+            TweenLite.to(_brleg, 0.4, {
+                y: 0,
+                delay: 0.5,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+
+            TweenLite.to(_brleg, 1.1, { rotationZ: 35, delay: 0.9, force3D: true }),
+            TweenLite.to(_brleg, 0.6, { x: -50, delay: 1.2, force3D: true }),
+
+            TweenLite.to(_brfoot, 0.5, { rotationZ: -50, delay: 0.9, force3D: true }),
+            TweenLite.to(_brfoot, 0.3, { rotationZ: -35, delay: 1.7, force3D: true }),
+
+            TweenLite.to(_brleg, 0.6, { y: -40, delay: 0.9, force3D: true }),
+            TweenLite.to(_brleg, 0.5, { y: 0, delay: 1.5, force3D: true }),
+
+            TweenLite.to(_brleg, 0.2, {
+                x: -40,
+                delay: 1.8,
+                ease: Power1.easeIn,
+                force3D: true
+            })
+        ]);
+
+        var tl5 = new TimelineMax({
+            repeat: -1,
+            delay: 0.0,
+            onReverseComplete: function () {
+                this.seek(tl5.duration());
+            }
+        });
+        var _castle = $(".castle");
+        TweenLite.set(_castle, { rotationZ: 9 });
+        tl5.add([
+            TweenLite.to(_castle, 1.0, { rotationZ: 7, delay: 0.0, force3D: true }),
+            TweenLite.to(_castle, 1.0, { rotationZ: 9, delay: 1.0, force3D: true }),
+
+            TweenLite.to(_castle, 0.5, {
+                x: "+=" + 2 * scale,
+                y: "-=" + 4 * scale,
+                delay: 0.0,
+                force3D: true
+            }),
+            TweenLite.to(_castle, 0.5, {
+                x: "-=" + 4 * scale,
+                y: "+=" + 4 * scale,
+                delay: 0.5,
+                force3D: true
+            }),
+            TweenLite.to(_castle, 0.5, {
+                x: "+=" + 4 * scale,
+                y: "-=" + 5 * scale,
+                delay: 1.0,
+                force3D: true
+            }),
+            TweenLite.to(_castle, 0.5, {
+                x: "-=" + 2 * scale,
+                y: "+=" + 5 * scale,
+                delay: 1.5,
+                force3D: true
+            })
+        ]);
+
+        var tl6 = new TimelineMax({ repeat: -1, delay: 0.2 });
+        var _mound = $(".mound-group");
+        TweenLite.set(_mound, { rotationZ: 2 });
+        tl6.add([
+            TweenLite.to(_mound, 1.0, { rotationZ: -1, delay: 0.0, force3D: true }),
+            TweenLite.to(_mound, 1.0, { rotationZ: 2, delay: 1.0, force3D: true })
+        ]);
+
+        var tl7 = new TimelineMax({ repeat: -1, delay: 0.8 });
+        var _wing = $(".wing");
+        TweenLite.set(_wing, { rotationZ: 2 });
+        tl7.add([
+            TweenLite.to(_wing, 1.0, { rotationZ: -1, x: -5, delay: 0.0, force3D: true }),
+            TweenLite.to(_wing, 1.0, { rotationZ: 2, x: 0, delay: 1.0, force3D: true })
+        ]);
+
+        var tl8 = new TimelineMax({ repeat: -1, delay: 0.0 });
+        var _chimney1 = $(".chimney1");
+        TweenLite.set(_chimney1, { rotationZ: -10 });
+        tl8.add([
+            TweenLite.to(_chimney1, 1.5, { rotationZ: 5, delay: 0.0, force3D: true }),
+
+            TweenLite.to(_chimney1, 1.5, { rotationZ: -10, delay: 1.5, force3D: true }),
+
+            TweenLite.to(_chimney1, 0.5, { y: 5, x: 0, delay: 0.1, force3D: true }),
+            TweenLite.to(_chimney1, 0.1, {
+                y: -15,
+                x: 4,
+                delay: 0.6,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_chimney1, 0.9, { y: 0, x: 0, delay: 0.7, force3D: true }),
+
+            TweenLite.to(_chimney1, 0.5, { y: 5, x: 0, delay: 1.6, force3D: true }),
+            TweenLite.to(_chimney1, 0.1, {
+                y: -15,
+                x: 4,
+                delay: 2.1,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_chimney1, 0.5, { y: 0, x: 0, delay: 2.2, force3D: true })
+        ]);
+
+        var tl9 = new TimelineMax({ repeat: -1, delay: 0.5 });
+        var _chimney2 = $(".chimney2");
+        TweenLite.set(_chimney2, { rotationZ: -10 });
+        tl9.add([
+            TweenLite.to(_chimney2, 1.5, { rotationZ: 5, delay: 0.0, force3D: true }),
+
+            TweenLite.to(_chimney2, 1.5, { rotationZ: -10, delay: 1.5, force3D: true }),
+
+            TweenLite.to(_chimney2, 0.5, { y: 5, x: 0, delay: 0.1, force3D: true }),
+            TweenLite.to(_chimney2, 0.1, {
+                y: -15,
+                x: 4,
+                delay: 0.6,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_chimney2, 0.9, { y: 0, x: 0, delay: 0.7, force3D: true }),
+
+            TweenLite.to(_chimney2, 0.5, { y: 5, x: 0, delay: 1.6, force3D: true }),
+            TweenLite.to(_chimney2, 0.1, {
+                y: -15,
+                x: 4,
+                delay: 2.1,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_chimney2, 0.5, { y: 0, x: 0, delay: 2.2, force3D: true })
+        ]);
+
+        var tl10 = new TimelineMax({ repeat: -1, delay: 1.1 });
+        var _chimney3 = $(".chimney3");
+        TweenLite.set(_chimney3, { rotationZ: -10 });
+        tl10.add([
+            TweenLite.to(_chimney3, 1.5, { rotationZ: 5, delay: 0.0, force3D: true }),
+
+            TweenLite.to(_chimney3, 1.5, { rotationZ: -10, delay: 1.5, force3D: true }),
+
+            TweenLite.to(_chimney3, 0.5, { y: 5, x: 0, delay: 0.1, force3D: true }),
+            TweenLite.to(_chimney3, 0.1, {
+                y: -15,
+                x: 4,
+                delay: 0.6,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_chimney3, 0.9, { y: 0, x: 0, delay: 0.7, force3D: true }),
+
+            TweenLite.to(_chimney3, 0.5, { y: 5, x: 0, delay: 1.6, force3D: true }),
+            TweenLite.to(_chimney3, 0.1, {
+                y: -15,
+                x: 4,
+                delay: 2.1,
+                ease: Power1.easeOut,
+                force3D: true
+            }),
+            TweenLite.to(_chimney3, 0.5, { y: 0, x: 0, delay: 2.2, force3D: true })
+        ]);
+
+        var tl11 = new TimelineMax({ repeat: -1, delay: 0.5 });
+        var _houses = $(".houses-group");
+        var _point1 = $(".point1");
+        var _point2 = $(".point2");
+        TweenLite.set(_houses, { rotationZ: 2, x: -4 });
+        TweenLite.set(_point1, { rotationZ: 2, x: -2 });
+        tl11.add([
+            TweenLite.to(_houses, 1.0, {
+                rotationZ: -1,
+                y: 5,
+                x: 0,
+                delay: 0.0,
+                force3D: true
+            }),
+            TweenLite.to(_houses, 1.0, {
+                rotationZ: 2,
+                y: 0,
+                x: -4,
+                delay: 1.0,
+                force3D: true
+            }),
+
+            TweenLite.to(_point1, 1.0, {
+                rotationZ: -10,
+                y: 2,
+                x: 0,
+                delay: 0.0,
+                force3D: true
+            }),
+            TweenLite.to(_point1, 1.0, {
+                rotationZ: 2,
+                y: 0,
+                x: -2,
+                delay: 1.0,
+                force3D: true
+            }),
+
+            TweenLite.to(_point2, 1.0, {
+                rotationZ: -5,
+                y: 5,
+                x: 2,
+                delay: 0.0,
+                force3D: true
+            }),
+            TweenLite.to(_point2, 1.0, {
+                rotationZ: 0,
+                y: 0,
+                x: 0,
+                delay: 1.0,
+                force3D: true
+            })
+        ]);
+
+        var tl12 = new TimelineMax({ repeat: -1, delay: 0.45 });
+        var _point4 = $(".point4");
+        var _point5 = $(".point5");
+        var _point6 = $(".point6");
+        tl12.add([
+            TweenLite.to(_point6, 0.3, { y: 3, delay: 0.0, force3D: true }),
+            TweenLite.to(_point6, 0.1, { y: -10, x: 4, delay: 0.3, force3D: true }),
+            TweenLite.to(_point6, 0.9, { y: 0, x: 0, delay: 0.4, force3D: true }),
+
+            TweenLite.to(_point5, 0.3, { y: 3, delay: 0.2, force3D: true }),
+            TweenLite.to(_point5, 0.1, { y: -7, x: 3, delay: 0.5, force3D: true }),
+            TweenLite.to(_point5, 0.7, { y: 0, x: 0, delay: 0.6, force3D: true }),
+
+            TweenLite.to(_point4, 0.3, { y: 3, delay: 0.4, force3D: true }),
+            TweenLite.to(_point4, 0.1, { y: -10, x: 4, delay: 0.7, force3D: true }),
+            TweenLite.to(_point4, 0.7, { y: 0, x: 0, delay: 0.8, force3D: true })
+        ]);
+
+        var tl13 = new TimelineMax({ repeat: -1, delay: 1.4 });
+        var _treehouse = $(".treehouse");
+        TweenLite.set(_treehouse, { rotationZ: -5, y: 20, x: 4 });
+        tl13.add([
+            TweenLite.to(_treehouse, 1.0, { rotationZ: 10, delay: 0.0, force3D: true }),
+            TweenLite.to(_treehouse, 1.0, { rotationZ: -5, delay: 1.0, force3D: true }),
+            TweenLite.to(_treehouse, 1.0, { rotationZ: 10, delay: 2.0, force3D: true }),
+            TweenLite.to(_treehouse, 1.0, { rotationZ: -5, delay: 3.0, force3D: true }),
+
+            TweenLite.to(_treehouse, 0.4, { y: -5, x: -2, delay: 0.2, force3D: true }),
+            TweenLite.to(_treehouse, 3.2, { y: 20, x: 4, delay: 0.8, force3D: true })
+        ]);
+
+        var tl14 = new TimelineMax({ repeat: -1, delay: 0.65 });
+        var _wind = $(".wind");
+        var _antenna = $(".antenna");
+        var _cannon = $(".cannon");
+        var _tele = $(".tele");
+        var _knob = $(".knob");
+        TweenLite.set(_antenna, { rotationZ: 10, x: 0 });
+        TweenLite.set(_wind, { rotationZ: -10, x: 0 });
+        TweenLite.set(_knob, { rotationZ: -20, x: 0 });
+        tl14.add([
+            TweenLite.to(_antenna, 1.0, {
+                rotationZ: -5,
+                x: 0,
+                delay: 0.0,
+                force3D: true
+            }),
+            TweenLite.to(_antenna, 1.0, {
+                rotationZ: 10,
+                x: 5,
+                delay: 1.0,
+                force3D: true
+            }),
+            TweenLite.to(_antenna, 1.0, {
+                rotationZ: -10,
+                x: -5,
+                delay: 2.0,
+                force3D: true
+            }),
+            TweenLite.to(_antenna, 1.0, {
+                rotationZ: 10,
+                x: 0,
+                delay: 3.0,
+                force3D: true
+            }),
+
+            TweenLite.to(_wind, 1.1, { rotationZ: 5, delay: 0.0, force3D: true }),
+            TweenLite.to(_wind, 1.0, { rotationZ: -15, delay: 1.1, force3D: true }),
+            TweenLite.to(_wind, 1.0, { rotationZ: 10, delay: 2.1, force3D: true }),
+            TweenLite.to(_wind, 0.9, { rotationZ: -10, delay: 3.1, force3D: true }),
+
+            TweenLite.to(_knob, 0.2, { rotationZ: 50, delay: 0.0, force3D: true }),
+            TweenLite.to(_knob, 0.2, { rotationZ: -20, delay: 0.3, force3D: true }),
+            TweenLite.to(_knob, 0.2, { rotationZ: 45, delay: 0.7, force3D: true }),
+            TweenLite.to(_knob, 0.2, { rotationZ: -25, delay: 1.0, force3D: true }),
+            TweenLite.to(_knob, 0.2, { rotationZ: 30, delay: 1.5, force3D: true }),
+            TweenLite.to(_knob, 0.2, { rotationZ: 0, delay: 1.9, force3D: true }),
+            TweenLite.to(_knob, 0.2, { rotationZ: -20, delay: 2.2, force3D: true }),
+            TweenLite.to(_knob, 0.3, { rotationZ: 60, delay: 2.6, force3D: true }),
+            TweenLite.to(_knob, 0.2, { rotationZ: -10, delay: 3.0, force3D: true }),
+            TweenLite.to(_knob, 0.2, { rotationZ: 40, delay: 3.4, force3D: true }),
+            TweenLite.to(_knob, 0.2, { rotationZ: -20, delay: 3.7, force3D: true }),
+
+            TweenLite.to(_tele, 1.0, { rotationZ: -3, delay: 0.0, force3D: true }),
+            TweenLite.to(_tele, 1.0, { rotationZ: 2, delay: 1.0, force3D: true }),
+            TweenLite.to(_tele, 1.0, { rotationZ: -3, delay: 2.0, force3D: true }),
+            TweenLite.to(_tele, 1.0, { rotationZ: 0, delay: 3.0, force3D: true }),
+
+            TweenLite.to(_tele, 0.25, { x: 25, y: 4, delay: 0.6, force3D: true }),
+            TweenLite.to(_tele, 2.5, { x: 0, y: 0, delay: 0.9, force3D: true }),
+
+            TweenLite.to(_cannon, 0.9, { rotationZ: -7, delay: 0.0, force3D: true }),
+            TweenLite.to(_cannon, 0.9, { rotationZ: 2, delay: 0.9, force3D: true }),
+            TweenLite.to(_cannon, 1.1, { rotationZ: -5, delay: 1.8, force3D: true }),
+            TweenLite.to(_cannon, 1.1, { rotationZ: 0, delay: 2.9, force3D: true }),
+
+            TweenLite.to(_cannon, 0.25, { x: 30, y: 4, delay: 0.85, force3D: true }),
+            TweenLite.to(_cannon, 2.6, { x: 0, y: 0, delay: 1.4, force3D: true })
+        ]);
+
+    </script>  -->
+</body>
+
+</html>

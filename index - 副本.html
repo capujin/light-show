@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灯光画——图片素材</title>
+    <link rel="stylesheet" href="./styles/index.css">
+    <script src="./scripts/imgSrc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="./styles/images-compare.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script type="text/javascript" src="./scripts/jquery.images-compare.js"></script>
+</head>
+
+<body>
+    <div id="sparticles-container"></div>
+    <h1 style="color: aliceblue;">灯光画</h1>
+    <p style="color: aliceblue;">QQ或微信打开有异常，推荐浏览器打开。</p>
+    <img style="width: 200px;" src="./images/QQ_logoreal.ico"></img>
+    <div style="width: 0;height: 0;" id="top"></div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/++胡桃-彩色（双份）.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/++胡桃-黑白（双份）.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/++雷电少女-彩色（双份）.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/++雷电少女-黑白（双份）.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/爱你老妈-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/爱你老妈-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/拔刀-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/拔刀-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload"src="./images/超酷-彩色.jpg" data-src="./images/space.png"  alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" src="./images/超酷-黑白.jpg" data-src="./images/space.png" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/春花秋月-亚索-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/春花秋月-亚索-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/大圣归来-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/大圣归来-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/迪迦-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/迪迦-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/放鞭炮.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/放鞭炮-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/高达-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/高达-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/科比-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/科比-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/铃芽之旅-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/铃芽之旅-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/罗小黑-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/罗小黑-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/你的名字-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/你的名字-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/神里绫华-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/神里绫华-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/提莫-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/提莫-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/王也-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/王也-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/伍佰2-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/伍佰2-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/伍六七-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/伍六七-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-1-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-1-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-2-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-2-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-3-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-3-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-4-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-4黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-5-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/雾山五行-5-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/胸口拔刀-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/胸口拔刀-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/钟离-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/钟离-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/哈尔的移动城堡-彩色.png" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/哈尔的移动城堡-黑白.png" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/猫咪老师-彩色.png" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/猫咪老师-黑色.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/科幻世界-彩色.png" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/科幻世界-黑白.png" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/长安三万里-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/长安三万里-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/荧-彩色.png" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/荧-黑白.png" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/温蒂-彩色.png" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/温蒂-黑白.png" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/可莉-彩色.jpg" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/可莉-黑白.jpg" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/迪卢克3-彩色.png" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/迪卢克3-黑白.png" alt="After">
+        </div>
+    </div>
+    <div class="myImageCompare">
+        <div style="display: none;">
+            <img class="lazyload" data-src="./images/space.png" src="./images/草神-纳西妲4-彩色.png" alt="Before">
+        </div>
+        <div>
+            <img class="lazyload" data-src="./images/space.png" src="./images/草神-纳西妲4-黑白.png" alt="After">
+        </div>
+    </div>
+
+    <a href="#top">
+        <div class="gotop">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <g fill="#000">
+                    <path
+                        d="M2.5 2.5a.75.75 0 010-1.5H13a.75.75 0 010 1.5H2.5zM2.985 9.795a.75.75 0 001.06-.03L7 6.636v7.614a.75.75 0 001.5 0V6.636l2.955 3.129a.75.75 0 001.09-1.03l-4.25-4.5a.75.75 0 00-1.09 0l-4.25 4.5a.75.75 0 00.03 1.06z" />
+                </g>
+            </svg>
+        </div>
+    </a>
+    <h1 style="font-size: 1rem; color: white;">敬请期待...</h1>
+    <p style="color: white; margin-bottom: 20px;">联系作者获取更多资源，QQ邮箱：<i
+            style="color: lightblue; text-decoration-color: aliceblue;">2074352684@qq.com</i></p>
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>

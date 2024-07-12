@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css?family=Major+Mono+Display&display=swap");
+body {
+  background: #404749;
+  background: radial-gradient(#404749 0%, #404749 85%, #303535);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shirt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.shirt>span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  font-weight: bold;
+}
+.shirt img {
+  /* max-height: 90%;
+  max-width: 80%; */
+  margin: auto;
+  position: relative;
+}
+
+.shirt__overlay {
+  overflow: hidden;
+  position: absolute;
+  width: 445px;
+  height: 316px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.shirt__overlay img {
+  width: 100%;
+  /* mix-blend-mode: multiply; */
+}
+.shirt__overlay__pattern {
+  position: absolute;
+  background-repeat: no-repeat;
+  top: 0%;  
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-size: cover;
+  /* -webkit-mask-image: url("./images/photo-mask.png");
+  mask-image: url("./images/photo-mask.png"); */
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+/* @media screen and (max-width: 400px) {
+  .textiles {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+  }
+} */
+.textiles {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  /* top: 25px; */
+  left: 0;
+}
+.textiles__option:nth-child(1){
+  transform: translateX(100px);
+}
+.textiles__option:nth-child(2){
+  transform: translateX(60px);
+}
+.textiles__option:nth-child(3){
+  transform: translateX(30px);
+}
+.textiles__option:nth-child(4){
+  transform: translateX(10px);
+}
+.textiles__option:nth-last-child(1){
+  transform: translateX(100px);
+}
+.textiles__option:nth-last-child(2){
+  transform: translateX(60px);
+}
+.textiles__option:nth-last-child(3){
+  transform: translateX(30px);
+}
+.textiles__option:nth-last-child(4){
+  transform: translateX(10px);
+}
+.textiles__option {
+  border-radius: 100%;
+  overflow: hidden;
+  width: 60px;
+  height: 60px;
+  border: 2px solid white;
+  margin: 3px 6px;
+  -webkit-appearance: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+  transform-origin: 150px 0;
+}
+.textiles__option img {
+  /* object-fit: cover; */
+  height: 100%;
+  cursor: pointer;
+}
+.textiles__option:hover, .textiles__option.active {
+  border-color: red;
+}
+.title {
+  user-select: none;
+  position: absolute;
+  z-index: 20;
+  font-family: "Major Mono Display", monospace;
+  color: white;
+  top: 16px;
+  right: 16px;
+  font-size: 28px;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-spacing: -5px;
+  letter-spacing: -1px;
+  padding-bottom: 15px;
+  text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.5);
+}
+.title small {
+  font-size: 14px;
+  position: absolute;
+  top: 120%;
+  right: 0;
+}
+.title::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  opacity: 0.25;
+  right: 0px;
+  height: 3px;
+  width: 87px;
+  background: white;
+}
+
+.disclaimer {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  font-size: 14px;
+  font-family: "Major Mono Display", sans-serif;
+  color: white;
+  z-index: 10;
+  letter-spacing: -1px;
+}
+.disclaimer a {
+  color: white;
+  margin-left: 5px;
+}
+.textiles--2 {
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
+.textiles--2 svg{
+  width: 100px;
+  height: 100px;
+}
+@media screen and (max-width: 540px) {
+  .textiles--2 svg{
+    width: 70px;
+    height: 70px;
+  }
+  .textiles__option {
+    width: 40px;
+    height: 40px;
+    transform-origin: 100px 0;
+  }
+  .textiles--2 {
+    right: 220px;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .title small {
+    font-size: 12px;
+  }
+
+  .disclaimer {
+    font-size: 12px;
+  }
+}
+@media screen and (max-height: 450px) {
+  .textiles--2 svg{
+    width: 55px;
+    height: 55px;
+  }
+  .textiles {
+    top: 135px;
+  }
+  .textiles__option {
+    width: 40px;
+    height: 40px;
+    transform-origin: 80px 0;
+  }
+  .textiles--2 {
+    right: 210px;
+  }
+
+  .title small {
+    display: none;
+  }
+}
